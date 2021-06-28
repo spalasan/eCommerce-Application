@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.TestUtils;
+import com.example.demo.exceptions.ExceptionsConstants;
+import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.model.persistence.Cart;
 import com.example.demo.model.persistence.Item;
 import com.example.demo.model.persistence.User;
@@ -18,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -50,8 +52,6 @@ public class CartControllerTest {
         item.setId(1L);
         item.setName("item1");
         item.setPrice(price);
-//        List<Item> items = new ArrayList<>();
-//        items.add(item);
         User u = new User();
         u.setId(1L);
         u.setUsername("testUser");
@@ -82,9 +82,8 @@ public class CartControllerTest {
         request.setQuantity(1);
         request.setUsername("testUser");
 
-        final ResponseEntity<Cart> response = cartController.addTocart(request);
-        assertNotNull(response);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        Exception exception = assertThrows(NotFoundException.class, () -> cartController.addTocart(request));
+        assertEquals(ExceptionsConstants.USER_NOT_FOUND, exception.getMessage());
     }
 
     @Test
@@ -95,9 +94,8 @@ public class CartControllerTest {
         request.setQuantity(1);
         request.setUsername("testUser");
 
-        final ResponseEntity<Cart> response = cartController.addTocart(request);
-        assertNotNull(response);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        Exception exception = assertThrows(NotFoundException.class, () -> cartController.addTocart(request));
+        assertEquals(ExceptionsConstants.ITEM_NOT_FOUND, exception.getMessage());
     }
 
     @Test
@@ -141,9 +139,8 @@ public class CartControllerTest {
         request.setQuantity(1);
         request.setUsername("testUser");
 
-        final ResponseEntity<Cart> response = cartController.removeFromcart(request);
-        assertNotNull(response);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        Exception exception = assertThrows(NotFoundException.class, () -> cartController.removeFromcart(request));
+        assertEquals(ExceptionsConstants.USER_NOT_FOUND, exception.getMessage());
     }
 
     @Test
@@ -153,10 +150,9 @@ public class CartControllerTest {
         request.setItemId(1L);
         request.setQuantity(1);
         request.setUsername("testUser");
+        Exception exception = assertThrows(NotFoundException.class, () -> cartController.removeFromcart(request));
+        assertEquals(ExceptionsConstants.ITEM_NOT_FOUND, exception.getMessage());
 
-        final ResponseEntity<Cart> response = cartController.removeFromcart(request);
-        assertNotNull(response);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
 }

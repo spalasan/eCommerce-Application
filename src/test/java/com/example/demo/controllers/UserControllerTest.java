@@ -1,6 +1,10 @@
 package com.example.demo.controllers;
 
 import com.example.demo.TestUtils;
+import com.example.demo.exceptions.ExceptionsConstants;
+import com.example.demo.exceptions.NotFoundException;
+import com.example.demo.exceptions.PasswordValidationException;
+import com.example.demo.exceptions.UserAlreadyExistsException;
 import com.example.demo.model.persistence.User;
 import com.example.demo.model.persistence.repositories.CartRepository;
 import com.example.demo.model.persistence.repositories.UserRepository;
@@ -13,8 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -96,8 +100,25 @@ public class UserControllerTest {
         createUserRequest.setPassword("123456");
         createUserRequest.setConfirmPassword("123456");
 
-        final ResponseEntity<User> response = userController.createUser(createUserRequest);
-        assertNotNull(response);
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        Exception exception = assertThrows(PasswordValidationException.class, () -> userController.createUser(createUserRequest));
+        assertEquals("Invalid Password", exception.getMessage());
+    }
+
+    @Test
+    public void verify_create_user_when_user_already_exists() {
+        when(userRepository.findByUsername(anyString())).thenReturn(new User());
+        CreateUserRequest createUserRequest = new CreateUserRequest();
+        createUserRequest.setUsername("test");
+        createUserRequest.setPassword("1234567");
+        createUserRequest.setConfirmPassword("1234567");
+
+        Exception exception = assertThrows(UserAlreadyExistsException.class, () -> userController.createUser(createUserRequest));
+        assertEquals(ExceptionsConstants.USERNAME_ALREADY_EXISTS, exception.getMessage());
+    }
+
+    @Test
+    public void verify_find_by_user_name_when_user_not_found() {
+        Exception exception = assertThrows(NotFoundException.class, () -> userController.findByUserName("testUsername"));
+        assertEquals(ExceptionsConstants.USER_NOT_FOUND, exception.getMessage());
     }
 }

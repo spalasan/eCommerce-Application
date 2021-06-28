@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.TestUtils;
+import com.example.demo.exceptions.ExceptionsConstants;
+import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.model.persistence.Item;
 import com.example.demo.model.persistence.repositories.ItemRepository;
 import org.junit.Before;
@@ -14,6 +16,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -77,5 +80,11 @@ public class ItemControllerTest {
         assertNotNull(responseItems);
         assertEquals(1L, responseItems.size());
         assertEquals(item.getName(), responseItems.get(0).getName());
+    }
+
+    @Test
+    public void verify_get_items_by_name_when_item_not_found() {
+        Exception exception = assertThrows(NotFoundException.class, () -> itemController.getItemsByName("testItemName"));
+        assertEquals(ExceptionsConstants.ITEM_NOT_FOUND, exception.getMessage());
     }
 }
