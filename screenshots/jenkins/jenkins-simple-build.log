@@ -1,0 +1,102 @@
+Started by user andreas spalas
+Obtained Jenkinsfile from git https://github.com/spalasan/eCommerce-Application
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/ecommerce-application-jwdnd
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/ecommerce-application-jwdnd/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/spalasan/eCommerce-Application # timeout=10
+Fetching upstream changes from https://github.com/spalasan/eCommerce-Application
+ > git --version # timeout=10
+ > git --version # 'git version 2.20.1'
+ > git fetch --tags --force --progress -- https://github.com/spalasan/eCommerce-Application +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/develop^{commit} # timeout=10
+Checking out Revision f56286b54ca401c5d7d19c09b5a43f6151ac1633 (refs/remotes/origin/develop)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f f56286b54ca401c5d7d19c09b5a43f6151ac1633 # timeout=10
+Commit message: "Keep only BUild stage in Jenkinsfile"
+ > git rev-list --no-walk 90509f871602ad817e67fb69414668e5f1700e24 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ mvn -B clean package
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.example:auth-course:war:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.version' for org.junit.jupiter:junit-jupiter:jar is either LATEST or RELEASE (both of them are being deprecated) @ line 73, column 13
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ----------------------< com.example:auth-course >-----------------------
+[INFO] Building auth-course 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ auth-course ---
+[INFO] Deleting /var/jenkins_home/workspace/ecommerce-application-jwdnd/target
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ auth-course ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ auth-course ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 25 source files to /var/jenkins_home/workspace/ecommerce-application-jwdnd/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ auth-course ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/jenkins_home/workspace/ecommerce-application-jwdnd/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ auth-course ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 6 source files to /var/jenkins_home/workspace/ecommerce-application-jwdnd/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ auth-course ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- maven-war-plugin:3.2.2:war (default-war) @ auth-course ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [auth-course] in [/var/jenkins_home/workspace/ecommerce-application-jwdnd/target/auth-course-0.0.1-SNAPSHOT]
+[INFO] Processing war project
+[INFO] Webapp assembled in [311 msecs]
+[INFO] Building war: /var/jenkins_home/workspace/ecommerce-application-jwdnd/target/auth-course-0.0.1-SNAPSHOT.war
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:2.1.5.RELEASE:repackage (repackage) @ auth-course ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.229 s
+[INFO] Finished at: 2021-06-29T23:30:31Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

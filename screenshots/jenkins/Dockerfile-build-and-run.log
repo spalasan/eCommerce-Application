@@ -1,0 +1,72 @@
+C:\projects\github\eCommerce-Application>docker build --tag=ecommerce-app:latest .
+[+] Building 15.2s (8/8) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                                                                               0.1s
+ => => transferring dockerfile: 217B                                                                                                                                                                                               0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                                  0.0s
+ => => transferring context: 2B                                                                                                                                                                                                    0.0s
+ => [internal] load metadata for docker.io/library/openjdk:8-jdk-alpine                                                                                                                                                            3.1s
+ => [auth] library/openjdk:pull token for registry-1.docker.io                                                                                                                                                                     0.0s
+ => [internal] load build context                                                                                                                                                                                                  1.5s
+ => => transferring context: 48.20MB                                                                                                                                                                                               1.4s
+ => [1/2] FROM docker.io/library/openjdk:8-jdk-alpine@sha256:94792824df2df33402f201713f932b58cb9de94a0cd524164a0f2283343547b3                                                                                                     11.4s
+ => => resolve docker.io/library/openjdk:8-jdk-alpine@sha256:94792824df2df33402f201713f932b58cb9de94a0cd524164a0f2283343547b3                                                                                                      0.0s
+ => => sha256:94792824df2df33402f201713f932b58cb9de94a0cd524164a0f2283343547b3 1.64kB / 1.64kB                                                                                                                                     0.0s
+ => => sha256:44b3cea369c947527e266275cee85c71a81f20fc5076f6ebb5a13f19015dce71 947B / 947B                                                                                                                                         0.0s
+ => => sha256:a3562aa0b991a80cfe8172847c8be6dbf6e46340b759c2b782f8b8be45342717 3.40kB / 3.40kB                                                                                                                                     0.0s
+ => => sha256:e7c96db7181be991f19a9fb6975cdbbd73c65f4a2681348e63a141a2192a5f10 2.76MB / 2.76MB                                                                                                                                     1.0s
+ => => sha256:f910a506b6cb1dbec766725d70356f695ae2bf2bea6224dbe8c7c6ad4f3664a2 238B / 238B                                                                                                                                         0.7s
+ => => sha256:c2274a1a0e2786ee9101b08f76111f9ab8019e368dce1e325d3c284a0ca33397 70.73MB / 70.73MB                                                                                                                                   8.7s
+ => => extracting sha256:e7c96db7181be991f19a9fb6975cdbbd73c65f4a2681348e63a141a2192a5f10                                                                                                                                          1.5s
+ => => extracting sha256:f910a506b6cb1dbec766725d70356f695ae2bf2bea6224dbe8c7c6ad4f3664a2                                                                                                                                          0.0s
+ => => extracting sha256:c2274a1a0e2786ee9101b08f76111f9ab8019e368dce1e325d3c284a0ca33397                                                                                                                                          2.4s
+ => [2/2] COPY ./target/auth-course-0.0.1-SNAPSHOT.jar auth-course-0.0.1-SNAPSHOT.jar                                                                                                                                              0.3s
+ => exporting to image                                                                                                                                                                                                             0.2s
+ => => exporting layers                                                                                                                                                                                                            0.2s
+ => => writing image sha256:3d73142b435cdfe19ec97cfb80281cb03188c8144d3351cb4ffca0d28ae8d1a6                                                                                                                                       0.0s
+ => => naming to docker.io/library/ecommerce-app:latest                                                                                                                                                                            0.0s
+
+C:\projects\github\eCommerce-Application>docker run -p 8888:8080 ecommerce-app:latest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.5.RELEASE)
+
+23:48:08.802 [main] INFO  c.example.demo.ECommerceApplication - Starting ECommerceApplication v0.0.1-SNAPSHOT on 5bec49d26943 with PID 1 (/auth-course-0.0.1-SNAPSHOT.jar started by root in /)
+23:48:08.805 [main] DEBUG c.example.demo.ECommerceApplication - Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+23:48:08.806 [main] INFO  c.example.demo.ECommerceApplication - No active profile set, falling back to default profiles: default
+23:48:09.790 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+23:48:09.915 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 107ms. Found 4 repository interfaces.
+23:48:10.757 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annota
+tion.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$22f91371] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+23:48:11.259 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+23:48:11.293 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+23:48:11.324 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+23:48:11.325 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.19]
+23:48:11.579 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+23:48:11.579 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2710 ms
+23:48:11.819 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+
+
+        name: default
+        ...]
+23:48:12.565 [main] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.3.10.Final}
+23:48:12.570 [main] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+23:48:12.965 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+23:48:13.343 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+23:48:14.351 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+23:48:14.900 [main] DEBUG c.e.d.s.JWTAuthenticationVerificationFilter - Filter 'JWTAuthenticationVerificationFilter' configured for use
+23:48:15.487 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly co
+nfigure spring.jpa.open-in-view to disable this warning
+23:48:15.603 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45fd9a4d, org.springframework.security.web
+.context.SecurityContextPersistenceFilter@5a18cd76, org.springframework.security.web.header.HeaderWriterFilter@79517588, org.springframework.web.filter.CorsFilter@50468873, org.springframework.security.web.authentication.logout.Logo
+utFilter@77825085, com.example.demo.security.JWTAuthenticationFilter@146587a2, com.example.demo.security.JWTAuthenticationVerificationFilter@5f0e9815, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@403f0a22, o
+rg.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6995bf68, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@76884e4b, org.springframework.security.web.session.SessionMan
+agementFilter@7ac0e420, org.springframework.security.web.access.ExceptionTranslationFilter@2f1de2d6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@55322aab]
+23:48:15.765 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+23:48:16.085 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+23:48:16.135 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+23:48:16.139 [main] INFO  c.example.demo.ECommerceApplication - Started ECommerceApplication in 7.826 seconds (JVM running for 8.707)
